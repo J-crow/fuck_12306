@@ -19,4 +19,16 @@ python版本`python 3.6`
 
 [0..99]那个列表可以猜到应该就是我查询的车次信息，与查询界面的车次信息进行对比，发现G1408是车次，IZQ,CWQ不知道是什么鬼，猜测是每个车站独有的代号<br>
 既然猜测是每个车站独有的代号，那么应该在进入这个查票界面的时候会有相关的get请求；<br>
-so我刷新再次进入这个界面  然后用了个比较笨的方法逐个请求寻找IZQ，果然在一个get请求里面找到了相应的信息 ![](https://github.com/J-crow/fuck_12306/raw/master/image/check1.png)<br>
+so我刷新再次进入这个界面  然后用了个比较笨的方法逐个请求寻找IZQ，果然在一个get请求里面找到了相应的信息 ![](https://github.com/J-crow/fuck_12306/raw/master/image/check2.png)<br>
+
+我试着去查询其他地方的车票，可以确定IZQ就是广州南的车站代号<br>
+然后把那些车站代号的信息存为一个py文件<br>
+通过split这个函数把车站代号构造成dict
+```python
+city={}
+for i in station_names.split('@'):
+    if i:
+        city[i.split('|')[1]]=i.split('|')[2] #构造字典12306所有车站:代号
+```
+
+然而爬虫查票url是Headers里面的Request URL:https://kyfw.12306.cn/otn/leftTicket/queryO?leftTicketDTO.train_date=2018-04-04&leftTicketDTO.from_station=GZQ&leftTicketDTO.to_station=CSQ&purpose_codes=ADULT
