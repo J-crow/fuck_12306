@@ -8,5 +8,5 @@ python版本`python 3.6`
 # 查票环节<br>
 首先打开12306的查票界面，`查票的url`：https://kyfw.12306.cn/otn/leftTicket/init<br>
 输入相应的信息（即车站和时间），并F12，Network<br>
-
+//图片
 可以看到get请求<br>
