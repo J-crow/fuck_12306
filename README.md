@@ -103,7 +103,7 @@ geturl()
 既然是post请求就习惯性的去看Headers的Form data![](https://github.com/J-crow/fuck_12306/raw/master/image/login4.png)<br>
 
 里面的数据也不知道是什么鬼，只能再试一次错误的登录看一下能不能找到破绽；<br>
-这次登录我把所有的验证图片都选了，如何这次的post请求的data数据如下图：![](https://github.com/J-crow/fuck_12306/raw/master/image/login7.png)<br>
+这次登录我把所有的验证图片都选了，这次的post请求的data数据如下图：![](https://github.com/J-crow/fuck_12306/raw/master/image/login7.png)<br>
 
 由上图可看出<br>
 `login_site:E`是固定的<br>
