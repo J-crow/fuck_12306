@@ -103,9 +103,14 @@ geturl()
 既然是post请求就习惯性的去看Headers的Form data![](https://github.com/J-crow/fuck_12306/raw/master/image/login4.png)<br>
 
 里面的数据也不知道是什么鬼，只能再试一次错误的登录看一下能不能找到破绽；<br>
-这次登录我把所有的验证图片都选了，如何这次的post请求的data数据如下图：
+这次登录我把所有的验证图片都选了，如何这次的post请求的data数据如下图：![](https://github.com/J-crow/fuck_12306/raw/master/image/login7.png)<br>
 
-
+由上图可看出<br>
+`login_site:E`是固定的<br>
+`rand:sjrand`也是固定的<br>
+而`answer:`是变化的，看着像是xy坐标<br>
+我多次尝试选择错误的验证码，尽可能点中图片的中间，最终确定`answer:`里面的参数是所点图片的坐标（就是说每个图都有个坐标范围，只要返回的`answer:`值在这个范围内就可以12306确定是那一张图片）<br>
+然后我试一次正确的登录，一下子弹出5个post请求，一堆get请求。（我们需要关注主要是post请求，get请求不需要过多的关注，除非里面有post所需要的随机字符串）
 
 
 
