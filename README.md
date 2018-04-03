@@ -93,8 +93,19 @@ geturl()
 ```
 ***
 # 登录12306<br>
-    首先说明这个登录12306的方法没有使用机器学习相关方面的库，是通过返回值坐标值来通过验证码的<br>
+    **首先说明这个登录12306的方法没有使用机器学习相关方面的库，是通过返回值坐标值来通过验证码的**<br>
 12306的登录url：https://kyfw.12306.cn/otn/login/init<br>
 按照爬虫的基本登录套路，输入错误的登录信息和验证码。<br>
 然后获得了一个get请求一个post请求 ![](https://github.com/J-crow/fuck_12306/raw/master/image/login1.png)<br>
-点开来看可以知道get请求是验证码的图片，post的请求是验证码校验![](https://github.com/J-crow/fuck_12306/raw/master/image/login2.png)<br>
+点开来看可以知道get请求是验证码的图片，post的请求是验证码校验，没有登录用户相关的请求，所以可以猜测12306是先检验验证码然后再检验用户信息
+![](https://github.com/J-crow/fuck_12306/raw/master/image/login3.png)  ![](https://github.com/J-crow/fuck_12306/raw/master/image/login2.png)<br>
+
+既然是post请求就习惯性的去看Headers的Form data![](https://github.com/J-crow/fuck_12306/raw/master/image/login4.png)<br>
+
+里面的数据也不知道是什么鬼，只能再试一次错误的登录看一下能不能找到破绽；<br>
+这次登录我把所有的验证图片都选了，如何这次的post请求的data数据如下图：
+
+
+
+
+
