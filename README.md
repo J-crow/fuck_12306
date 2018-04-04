@@ -127,14 +127,35 @@ urllib.request.install_opener(opener)   #将opener这个已经绑定cookie的函
 然后通过`urllib.parse.urlencode`返回form_data，记得要加消息头，最终实现登录。
 
 
-# 购票环节 <br>
+# 购票环节<br>
 购票环节比较繁琐，建议用抓包工具fiddler去寻找相关的随机数。
 
-其中`预定信息提交的url`：https://kyfw.12306.cn/otn/leftTicket/submitOrderRequest 里面的secretStr是每辆车次的随机字符串<br>
+其中`预定信息提交的url`：https://kyfw.12306.cn/otn/leftTicket/submitOrderRequest 里面的secretStr是每辆车次的随机字符串（在查票那个环节里面生成）<br>
+![](https://github.com/J-crow/fuck_12306/raw/master/image/buy1.png)<br>
     而这段字符串有点坑爹<br>
     不知道是12306挖的坑还是正则表达式的转换问题  车次的随机数据%被替换成了%25 <br>
 ```python
 data1=dpdata3.replace("%25","%")
 data2=data1.encode('utf-8')
 ```
+然后接下来寻找生成的随机数要给点耐心。<br>
+就好比我要寻找TOKEN这个随机字符串，![](https://github.com/J-crow/fuck_12306/raw/master/image/buy2.png)<br>
+要在前面请求的相应里面寻找![](https://github.com/J-crow/fuck_12306/raw/master/image/buy3.png)<br>
+
+`url1`：https://kyfw.12306.cn/otn/confirmPassenger/initDc<br>
+里面可以找到`leftTicketStr`,`Token`,`key_check_isChange`,`train_location`；<br>
+
+`url2`:https://kyfw.12306.cn/otn/confirmPassenger/getPassengerDTOs<br>
+里面可以找到`passenger_name`,`mobile_no`等相关的用户信息；<br>
+
+`url3`:`"https://kyfw.12306.cn/otn/confirmPassenger/queryOrderWaitTime?tourFlag=dc&_json_att=&REPEAT_SUBMIT_TOKEN="+str(token)`<br>
+里面可以找到`orderSequence_no`<br>
+
+其中还要注意这些随机字符串中的某一字段有没有被替换成其他字段。<br>
+
+如下图的`passengerTicketStr`的`1,0,1`对应我所选的座位类型（这需要一个个的试出来，例如：`硬座`是`1,0,1`，`无座`是`3,0,1`）
+![](https://github.com/J-crow/fuck_12306/raw/master/image/buy4.png)<br>
+
+然而最令人头痛的是`格林时间``GMT`![](https://github.com/J-crow/fuck_12306/raw/master/image/buy5.png)<br>
+如上图`train_date`就是格林时间`GMT`  `seatType`是所选座位类型。
 
