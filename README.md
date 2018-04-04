@@ -124,9 +124,11 @@ urllib.request.install_opener(opener)   #将opener这个已经绑定cookie的函
 其中登录相关验证的post请求里面有个tk值是随机字符串![](https://github.com/J-crow/fuck_12306/raw/master/image/login9.png)<br>
 
 我就往回找这个tk值，在这个post请求https://kyfw.12306.cn/passport/web/auth/uamtk 找到相应的tk值![](https://github.com/J-crow/fuck_12306/raw/master/image/login10.png)<br>
+然后通过`urllib.parse.urlencode`返回form_data，记得要加消息头，最终实现登录。
 
 
-
+# 购票环节 <br>
+购票环节比较繁琐，建议用抓包工具fiddler去寻找相关的随机数。
 
 
 
