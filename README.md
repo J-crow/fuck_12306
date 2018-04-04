@@ -130,6 +130,11 @@ urllib.request.install_opener(opener)   #将opener这个已经绑定cookie的函
 # 购票环节 <br>
 购票环节比较繁琐，建议用抓包工具fiddler去寻找相关的随机数。
 
-
-
+其中`预定信息提交的url`：https://kyfw.12306.cn/otn/leftTicket/submitOrderRequest 里面的secretStr是每辆车次的随机字符串<br>
+    而这段字符串有点坑爹<br>
+    不知道是12306挖的坑还是正则表达式的转换问题  车次的随机数据%被替换成了%25 <br>
+```python
+data1=dpdata3.replace("%25","%")
+data2=data1.encode('utf-8')
+```
 
