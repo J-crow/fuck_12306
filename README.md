@@ -114,5 +114,5 @@ geturl()
 ![](https://github.com/J-crow/fuck_12306/raw/master/image/login8.png)<br>
 
 随后我就通过Python来模拟登录，主要是模仿浏览器post请求<br>
-
+注:要加入cookies值才能爬取相关信息并保持登录
 
