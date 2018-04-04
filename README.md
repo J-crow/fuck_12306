@@ -114,11 +114,20 @@ geturl()
 ![](https://github.com/J-crow/fuck_12306/raw/master/image/login8.png)<br>
 
 随后我就通过Python来模拟登录，主要是模仿浏览器post请求<br>
-      `注:要加入cookies值才能爬取相关信息并保持登录`<br>
+      **注:要加入cookies值才能爬取相关信息并保持登录**<br>
  ****
 ```python
 cjar=http.cookiejar.CookieJar()     #保存cookie值
 opener=urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cjar))   #加入保存后的cookie
 urllib.request.install_opener(opener)   #将opener这个已经绑定cookie的函数加入request中
 ```
+其中登录相关验证的post请求里面有个tk值是随机字符串![](https://github.com/J-crow/fuck_12306/raw/master/image/login9.png)<br>
+
+我就往回找这个tk值，在这个post请求https://kyfw.12306.cn/passport/web/auth/uamtk 找到相应的tk值![](https://github.com/J-crow/fuck_12306/raw/master/image/login10.png)<br>
+
+
+
+
+
+
 
