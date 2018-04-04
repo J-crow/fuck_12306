@@ -156,6 +156,28 @@ data2=data1.encode('utf-8')
 如下图的`passengerTicketStr`的`1,0,1`对应我所选的座位类型（这需要一个个的试出来，例如：`硬座`是`1,0,1`，`无座`是`3,0,1`）
 ![](https://github.com/J-crow/fuck_12306/raw/master/image/buy4.png)<br>
 
-然而最令人头痛的是`格林时间``GMT`![](https://github.com/J-crow/fuck_12306/raw/master/image/buy5.png)<br>
-如上图`train_date`就是格林时间`GMT`  `seatType`是所选座位类型。
+然而最令人头痛的是`格林时间`-`GMT`![](https://github.com/J-crow/fuck_12306/raw/master/image/buy5.png)<br>
+如上图`train_date`就是格林时间`GMT`  `seatType`是所选座位类型。<br>
+12306的`GMT`形式是`星期`+`月`+`日`+`年`+`00:00:00`+`GMT`+`0800`;<br>
+```python
+#将日期转为格林时间  gmt
+datestr=train_date       #需要的买票时间
+#先将字符串形式的时间转为常规时间格式        strptime格式化输出
+date1=datetime.datetime.strptime(datestr,"%Y-%m-%d").date()
+#再转为对应的格林时间
+gmt='%a+%b+%d+%Y'    #a是星期的英文单词的缩写  b是月份的英文单词的缩写
+gmtdate=date1.strftime(gmt)
+```
+
+返回这么多个post请求，终于买到票了<br>
+然而却是另一番景象--->30分钟的排队等票<br>
+我万脸懵逼，百度了一下办法，也无果，碰巧有一天在知乎上有人说加延时可跳过排队；<br>
+```python
+time.sleep(1)
+```
+这个方法确实可以跳过排队，但是我觉得程序抢票的宗旨是要快，加了延时感觉违背了宗旨，不知道有没有大神可以解答一下这个问题。
+
+转载请标明作者出处，谢谢<br>
+本文仅供学习参考，不做商业用途.<br>
+
 
