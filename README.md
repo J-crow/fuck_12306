@@ -113,6 +113,6 @@ geturl()
 然后我试一次正确的登录，一下子弹出5个post请求，一堆get请求。（我们需要关注主要是post请求，get请求不需要过多的关注，除非里面有post所需要的随机字符串）
 ![](https://github.com/J-crow/fuck_12306/raw/master/image/login8.png)<br>
 
-
+随后我就通过Python来模拟登录，主要是模仿浏览器post请求<br>
 
 
